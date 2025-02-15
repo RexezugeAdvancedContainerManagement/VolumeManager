@@ -1,5 +1,6 @@
 [requires]
-fruit/3.7.0
+fruit/3.7.1
+gtest/1.15.0
 
 [generators]
 CMakeDeps
