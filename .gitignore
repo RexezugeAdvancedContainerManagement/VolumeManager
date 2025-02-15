@@ -1,5 +1,7 @@
 ### Build Output Directory
 build/
+build-debug/
+build-release/
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,c++,cmake,clion,intellij,conan
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,c++,cmake,clion,intellij,conan
