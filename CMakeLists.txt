@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(FruitExample LANGUAGES CXX)
+project(VolumeManager LANGUAGES CXX)
 
 # Include Conan-generated setup
 include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
@@ -19,7 +19,7 @@ file(GLOB LIB_SOURCES "src/*.cpp" "src/*/*.cpp")
 list(REMOVE_ITEM LIB_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
 # Configure headers
-file(GLOB HEADERS "include/*.hpp" "src/*.hpp" "include/*/*.hpp" "src/*/*.hpp")
+file(GLOB HEADERS "include/*.hpp" "include/*/*.hpp" "src/*.hpp" "src/*/*.hpp")
 
 # Core library containing business logic
 add_library(fruit_lib STATIC ${LIB_SOURCES} ${HEADERS})
