@@ -21,7 +21,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 
 echo "=== RUNNING PROGRAM ==="
-./FruitExample
+./VolumeManager
 
 cd ..
 echo "=== RELEASE BUILD AND EXECUTION COMPLETED SUCCESSFULLY ==="
