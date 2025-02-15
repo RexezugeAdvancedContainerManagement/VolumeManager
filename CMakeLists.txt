@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
-include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
 project(FruitExample LANGUAGES CXX)
+
+# Include Conan-generated setup
+include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
 
 # C++ standard configuration
 set(CMAKE_CXX_STANDARD 17)
@@ -9,6 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find dependencies
 find_package(fruit REQUIRED)
 find_package(GTest REQUIRED)
+find_package(CURL REQUIRED)
+find_package(jsoncpp REQUIRED)
 
 # Configure library sources (exclude main.cpp)
 file(GLOB LIB_SOURCES "src/*.cpp" "src/*/*.cpp")
@@ -25,7 +29,7 @@ target_include_directories(fruit_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
                                             ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Public linking for transitive dependencies
-target_link_libraries(fruit_lib PUBLIC fruit::fruit)
+target_link_libraries(fruit_lib PUBLIC fruit::fruit CURL::libcurl jsoncpp_lib)
 
 # Main executable
 add_executable(${PROJECT_NAME} src/main.cpp)
