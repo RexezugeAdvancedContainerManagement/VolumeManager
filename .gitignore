@@ -1,8 +1,5 @@
-### Build Files
-build/*
-CMakePresets.json
-*.cmake
-*.sh
+### Build Output Directory
+build/
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,c++,cmake,clion,intellij,conan
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,c++,cmake,clion,intellij,conan
