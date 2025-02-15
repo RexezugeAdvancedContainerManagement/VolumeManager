@@ -1,16 +1,19 @@
 #include "Application.hpp"
 #include "IApplication.hpp"
+#include "docker/DockerManager.hpp"
+#include "docker/IDockerManager.hpp"
 #include "gateway/HttpClient.hpp"
 #include "gateway/IHttpClient.hpp"
 #include <fruit/fruit.h>
-#include <iostream>
 
 fruit::Component<IApplication> getApplicationComponent() {
   return fruit::createComponent()
       .bind<IApplication, Application>() // Bind IApplication to Application
       .bind<IHttpClient, HttpClient>()   // Bind IHttpClient to HttpClient
+      .bind<IDockerManager, DockerManager>()
       .registerConstructor<Application(
-          std::string, IHttpClient *)>() // Register Application constructor
+          IHttpClient *,
+          IDockerManager *)>() // Register Application constructor
       .registerProvider([]() {
         return std::string("Hello from Safe DI!");
       }); // Provide the message
@@ -19,9 +22,9 @@ fruit::Component<IApplication> getApplicationComponent() {
 int main() {
   fruit::Injector<IApplication> injector(getApplicationComponent);
 
-  // Get reference without ownership transfer
-  IApplication &app = injector.get<IApplication &>();
+  const IApplication &application = injector.get<IApplication &>();
 
-  std::cout << app.greet() << std::endl;
+  application.start();
+
   return 0;
 }

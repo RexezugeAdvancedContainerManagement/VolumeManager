@@ -1,14 +1,15 @@
 #pragma once
 #include "IApplication.hpp"
-#include "gateway/HttpClient.hpp"
+#include "docker/IDockerManager.hpp"
+#include "gateway/IHttpClient.hpp"
 #include <fruit/fruit.h>
-#include <string>
 
 class Application : public IApplication {
-  const std::string message;
   const IHttpClient *httpClient;
+  const IDockerManager *dockerManager;
 
 public:
-  INJECT(Application(std::string message, IHttpClient *httpClient));
-  std::string greet() const override;
+  INJECT(Application(const IHttpClient *httpClient,
+                     const IDockerManager *dockerManager));
+  void start() const override;
 };

@@ -1,11 +1,11 @@
 #include "Application.hpp"
-#include "gateway/HttpClient.hpp"
 #include <iostream>
 #include <json/json.h>
 #include <string>
 
-Application::Application(std::string message, IHttpClient *httpClient)
-    : message(std::move(message)), httpClient(httpClient) {}
+Application::Application(const IHttpClient *httpClient,
+                         const IDockerManager *dockerManager)
+    : httpClient(httpClient), dockerManager(dockerManager) {}
 
 Json::Value parseJson(const std::string &jsonString) {
   Json::Value root;
@@ -23,11 +23,15 @@ Json::Value parseJson(const std::string &jsonString) {
   return root;
 }
 
-std::string Application::greet() const {
-  std::string url = "http://localhost/containers/json";
-  std::string httpResponse = httpClient->sendRequest(url);
+void Application::start() const {
+  // std::string url = "http://localhost/containers/json";
+  // std::string httpResponse = httpClient->sendRequest(url);
 
-  Json::Value jsonResponse = parseJson(httpResponse);
-  std::cout << "Containers: " << jsonResponse << std::endl;
-  return message + " " + httpResponse;
+  // Json::Value jsonResponse = parseJson(httpResponse);
+  // std::cout << "Containers: " << jsonResponse << std::endl;
+  std::vector<ContainerInfo> containerInfos = dockerManager->listContainers();
+
+  for (const auto &container : containerInfos) {
+    std::cout << container << std::endl;
+  }
 }
