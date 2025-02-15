@@ -1,0 +1,6 @@
+[requires]
+fruit/3.7.0
+
+[generators]
+CMakeDeps
+CMakeToolchain
